@@ -17,7 +17,7 @@ const Sidebar:FC = ():ReactElement => {
         flexDirection:'column',
         alignItems:'center',
     }}>
-      <Profile/>
+      <Profile love='ram'/>
     </Grid>
   )
 }
