@@ -1,6 +1,7 @@
 import {FC,ReactElement} from 'react'
 import Grid from '@mui/material/Grid2';
 import Profile from '../profile/Profile';
+import CreateTaskForm from '../createTaskForm/CreateTaskForm';
 
 
 const Sidebar:FC = ():ReactElement => {
@@ -15,9 +16,10 @@ const Sidebar:FC = ():ReactElement => {
         display:'flex',
         justifyContent:'center',
         flexDirection:'column',
-        alignItems:'center',
+        // alignItems:'center',
     }}>
-      <Profile love='ram'/>
+      <Profile name='Prajwol'/>
+      <CreateTaskForm />
     </Grid>
   )
 }
