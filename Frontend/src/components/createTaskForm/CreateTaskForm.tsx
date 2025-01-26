@@ -29,7 +29,7 @@ const CreateTaskForm: FC = (): ReactElement => {
               },
             ]}
           />
-          <SelectField
+          <SelectField name="Priority" label="Priority"
             items={[
               { value: Priority.high, label: Priority.high.toUpperCase() },
               { value: Priority.normal, label: Priority.normal.toUpperCase() },
