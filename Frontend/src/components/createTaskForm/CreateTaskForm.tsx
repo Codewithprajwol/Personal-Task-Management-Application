@@ -5,7 +5,7 @@ import TaskDescriptionField from "./_taskDescriptionField";
 import DateField from "./_taskDateField";
 import SelectField from "./_taskSelectField";
 import { Status } from "./enums/Status";
-import { Priority } from "./enums/priority";
+import { Priority } from "./enums/Priority";
 
 const CreateTaskForm: FC = (): ReactElement => {
   return (

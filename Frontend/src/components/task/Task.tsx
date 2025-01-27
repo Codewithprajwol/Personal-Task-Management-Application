@@ -4,16 +4,17 @@ import { TaskHeader } from "./_taskHeader";
 import { TaskDescription } from "./_taskDescription";
 import { TaskFooter } from "./_taskFooter";
 import { ITask } from "./interfaces/ITask";
-import PropTypes from "prop-types";
+import PropTypes, { Validator } from "prop-types";
 import { Status } from "../createTaskForm/enums/Status";
-import { Priority } from "../createTaskForm/enums/Priority";
+// import { Priority } from "../createTaskForm/enums/Priority";
+import { correctStatustype, emitCorrectStatus } from "./helper/emitCorrectStatus";
 
 const Task: FC<ITask> = (props): ReactElement => {
   const {
     title = "hello",
     date = new Date(),
     status=Status.completed,
-    priority=Priority.normal,
+    // priority=Priority.normal,//?here in course this is used here to make changes in borderColor
     description = "do your work as soon as possible",
     onStatusChange=(e)=>console.log(e),
     onClick=(e)=>console.log(e),
@@ -28,10 +29,10 @@ const Task: FC<ITask> = (props): ReactElement => {
       p={2}
       sx={{
         width: "100%",
-        backgroundColor: "background.paper",
+        backgroundColor: "background.blue",
         borderRadius: "8px",
         border: "1px solid",
-        borderColor: "error.light",
+        borderColor:`${emitCorrectStatus(status)}`,
       }}
     >
       <TaskHeader title={title} date={date} />
@@ -48,7 +49,7 @@ Task.propTypes={
     onStatusChange:PropTypes.func,
     onClick:PropTypes.func,
     priority:PropTypes.string,
-    status:PropTypes.string
+    status:PropTypes.oneOf(["InProgress", "Todo", "Completed"]) as Validator<correctStatustype>
 }
 
 export default Task;
