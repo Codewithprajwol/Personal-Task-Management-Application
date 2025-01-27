@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import {format} from 'date-fns'
 import { TaskCounter } from "../taskCounter/TaskCounter";
 import { Status } from "../createTaskForm/enums/Status";
+import Task from "../task/task";
 
 
 const Taskarea: FC = (): ReactElement => {
@@ -31,7 +32,7 @@ const Taskarea: FC = (): ReactElement => {
             flexDirection={"column"}
             size={{ xs: 10, md: 8 }}
           >
-            <Box>Task will come over here</Box>
+            <Task/>
             <Box>Task will come over here</Box>
           </Grid>
         </Grid>
