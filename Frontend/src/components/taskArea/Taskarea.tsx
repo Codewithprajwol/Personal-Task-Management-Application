@@ -33,7 +33,8 @@ const Taskarea: FC = (): ReactElement => {
             size={{ xs: 10, md: 8 }}
           >
             <Task/>
-            <Box>Task will come over here</Box>
+            <Task/>
+            <Task/>
           </Grid>
         </Grid>
       </Grid>
