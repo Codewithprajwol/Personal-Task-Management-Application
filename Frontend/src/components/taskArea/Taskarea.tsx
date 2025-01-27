@@ -1,8 +1,9 @@
 import { FC, ReactElement } from "react";
 import Grid from "@mui/material/Grid2";
 import { Box } from "@mui/material";
-import { format } from "date-fns";
-import { TaskCounter } from "../taskCounter/taskCounter";
+import {format} from 'date-fns'
+import { TaskCounter } from "../taskCounter/TaskCounter";
+import { Status } from "../createTaskForm/enums/Status";
 
 
 const Taskarea: FC = (): ReactElement => {
@@ -21,9 +22,9 @@ const Taskarea: FC = (): ReactElement => {
             size={{ xs: 12, md: 10 }}
             mb={8}
           >
-           <TaskCounter />
-           <TaskCounter />
-           <TaskCounter />
+           <TaskCounter count={2} status={Status.todo} />
+           <TaskCounter count={3} status={Status.inProgress} />
+           <TaskCounter count={8} status={Status.completed} />
           </Grid>
           <Grid
             display="flex"

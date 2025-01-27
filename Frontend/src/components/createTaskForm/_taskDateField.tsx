@@ -18,11 +18,11 @@ const DateField:FC<IDateField>=(props):ReactElement=>{
       </LocalizationProvider>
     )
     
-    DateField.propTypes={
-        disabled:PropTypes.bool,
-        onChange:PropTypes.func,
-        value:PropTypes.instanceOf(Date),
-    }
 }
 
+DateField.propTypes={
+    disabled:PropTypes.bool,
+    onChange:PropTypes.func,
+    value:PropTypes.instanceOf(Date),
+}
 export default DateField;
