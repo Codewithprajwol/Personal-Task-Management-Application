@@ -5,6 +5,8 @@ import taskRoutes from './routes/task.routes.js'
 const app:Express=express()
 
 
+app.use(express.json())
+
 
 app.use('/',taskRoutes)
 

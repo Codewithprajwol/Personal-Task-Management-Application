@@ -1,4 +1,15 @@
 ### Fetch all tasks
 
 GET http://localhost:3000/tasks
-Content-Type:application/json
+Content-Type: application/json
+
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title":"hello from nepal",
+    "date":"2025-03-01T13:00:00Z",
+    "description":"hello from nepalese from nepal",
+    "priority":"low",
+    "status":"Todo"
+}
