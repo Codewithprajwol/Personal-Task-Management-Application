@@ -1,14 +1,12 @@
-import express,{Express,Request, Response} from 'express'
+import express,{Express} from 'express'
 import 'dotenv/config'
 import { AppDataSource } from './config/connectdb.js'
+import taskRoutes from './routes/task.routes.js'
 const app:Express=express()
 
 
 
-app.get('/',(req:Request,res:Response)=>{
-    res.send('hello from nepal')
-    
-})
+app.use('/',taskRoutes)
 
 
 app.listen(3000,()=>{

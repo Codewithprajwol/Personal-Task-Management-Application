@@ -1,10 +1,9 @@
 import express from 'express';
 import 'dotenv/config';
 import { AppDataSource } from './config/connectdb.js';
+import taskRoutes from './routes/task.routes.js';
 const app = express();
-app.get('/', (req, res) => {
-    res.send('hello from nepal');
-});
+app.use('/', taskRoutes);
 app.listen(3000, () => {
     AppDataSource.initialize().then(() => {
         console.log('Data source has been intialized');
