@@ -28,3 +28,7 @@ export const createValidator = [
         .isIn([Status.todo, Status.inProgress, Status.complete])
         .withMessage("status can only todo,inProgress or completed"),
 ];
+export const updateValidator = [
+    body('id').not().isEmpty().withMessage('The task id is mandatory').trim().isString().withMessage('ID needs to be a valid uuid format'),
+    body('status').trim().isIn([Status.complete, Status.todo, Status.inProgress])
+];
