@@ -1,4 +1,4 @@
-import React,{ FC, ReactElement } from "react";
+import React,{ FC, ReactElement,useEffect,useContext } from "react";
 import Grid from "@mui/material/Grid2";
 import { Alert, Box, LinearProgress } from "@mui/material";
 import { format } from "date-fns";
@@ -9,8 +9,13 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/sendApiRequest";
 import { ITaskApi } from "./interfaces/ITaskApi";
 import { IUpdateTask } from "./interfaces/IUpdateTask";
+import { countTask } from "./helpers/countTask";
+import { TaskStatusChangedContext } from "../context";
+
+
 
 const Taskarea: FC = (): ReactElement => {
+  const tasksUpdatedContext=useContext(TaskStatusChangedContext)
   const { error, isLoading, data, refetch } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () =>
@@ -33,6 +38,15 @@ function handleOnMarkComplete(e:React.MouseEvent<HTMLButtonElement> | React.Mous
     status:Status.complete
   })
 }
+useEffect(()=>{
+  refetch();
+},[tasksUpdatedContext.updated])
+
+useEffect(()=>{
+   if(updateTaskMutation.isSuccess){
+    tasksUpdatedContext.toggle();
+   }
+},[updateTaskMutation.isSuccess])
   return (
     <>
       <Grid size={{ xs: 6, md: 8 }}>
@@ -48,9 +62,9 @@ function handleOnMarkComplete(e:React.MouseEvent<HTMLButtonElement> | React.Mous
             size={{ xs: 12, md: 10 }}
             mb={8}
           >
-            <TaskCounter count={2} status={Status.todo} />
-            <TaskCounter count={3} status={Status.inProgress} />
-            <TaskCounter count={8} status={Status.complete} />
+            <TaskCounter  status={Status.todo} count={data? countTask(data,Status.todo):undefined} />
+            <TaskCounter  status={Status.inProgress} count={data? countTask(data,Status.inProgress):undefined} />
+            <TaskCounter  status={Status.complete} count={data? countTask(data,Status.complete):undefined} />
           </Grid>
           <Grid
             display="flex"

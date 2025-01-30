@@ -1,5 +1,5 @@
 import { Alert, AlertTitle, Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect,useContext, useState } from "react";
 import TaskTitleField from "./_taskTitleField";
 import TaskDescriptionField from "./_taskDescriptionField";
 import DateField from "./_taskDateField";
@@ -9,6 +9,7 @@ import { Priority } from "./enums/Priority";
 import { useMutation } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/sendApiRequest";
 import { ICreateTask } from "../taskArea/interfaces/ICreateTask";
+import { TaskStatusChangedContext } from "../context";
 
 const CreateTaskForm: FC = (): ReactElement => {
   const [title,setTitle]=useState<string| undefined>(undefined)
@@ -18,6 +19,7 @@ const CreateTaskForm: FC = (): ReactElement => {
   const [status,setStatus]=useState<string>(Status.todo)
   const [showAlert,setShowAlert]=useState<boolean>(false)
 
+  const taskUpdatedContext=useContext(TaskStatusChangedContext)
   const createTaskMutation=useMutation({mutationFn:async(data:ICreateTask)=>{return await sendApiRequest('http://localhost:3000/tasks','POST',data)}})
   function createTaskhandler(){
     if(!title || !description ||! date){
@@ -31,6 +33,7 @@ const CreateTaskForm: FC = (): ReactElement => {
   useEffect(()=>{
     if(createTaskMutation.isSuccess){
       setShowAlert(true)
+      taskUpdatedContext.toggle()
     }
     const clearAlert=setTimeout(()=>{setShowAlert(false)},5000)
 

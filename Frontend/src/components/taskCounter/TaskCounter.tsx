@@ -42,5 +42,5 @@ export const TaskCounter: FC<ITaskCounter> = (props): ReactElement => {
 };
 TaskCounter.propTypes={
   count:PropTypes.number,
-  status:PropTypes.oneOf([Status.todo,Status.inProgress,Status.completed])
+  status:PropTypes.oneOf([Status.todo,Status.inProgress,Status.complete])
 }

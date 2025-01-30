@@ -8,7 +8,7 @@ export const emitCorrectColor=(status:Status):string=>{
             return 'error.light'
         case Status.inProgress:
             return 'warning.light'
-        case Status.completed:
+        case Status.complete:
             return 'success.light'
     }
 
