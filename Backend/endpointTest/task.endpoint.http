@@ -14,10 +14,10 @@ Content-Type: application/json
     "status":"Todo"
 }
 
-PUT http://localhost:3000/tasks
+PUT http://localhost:3000/tasks 
 Content-Type:application/json
 
 {
     "id":"1",
-    "status":"InProgress"
+    "status":"Complete"
 }
