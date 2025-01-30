@@ -2,9 +2,11 @@ import express,{Express} from 'express'
 import 'dotenv/config'
 import { AppDataSource } from './config/connectdb.js'
 import taskRoutes from './routes/task.routes.js'
+import cors from 'cors'
 const app:Express=express()
 
 
+app.use(cors())
 app.use(express.json())
 
 
