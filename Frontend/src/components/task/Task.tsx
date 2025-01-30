@@ -7,13 +7,14 @@ import { ITask } from "./interfaces/ITask";
 import PropTypes, { Validator } from "prop-types";
 import { Status } from "../createTaskForm/enums/Status";
 // import { Priority } from "../createTaskForm/enums/Priority";
-import { correctStatustype, emitCorrectStatus } from "./helper/emitCorrectStatus";
+import { emitCorrectStatus } from "./helper/emitCorrectStatus";
 
 const Task: FC<ITask> = (props): ReactElement => {
   const {
     title = "hello",
     date = new Date(),
-    status=Status.completed,
+    id,
+    status=Status.complete,
     // priority=Priority.normal,//?here in course this is used here to make changes in borderColor
     description = "do your work as soon as possible",
     onStatusChange=(e)=>console.log(e),
@@ -37,7 +38,7 @@ const Task: FC<ITask> = (props): ReactElement => {
     >
       <TaskHeader title={title} date={date} />
       <TaskDescription description={description} />
-      <TaskFooter onStatusChange={onStatusChange} onClick={onClick} />
+      <TaskFooter onStatusChange={onStatusChange} onClick={onClick} id={id} status={status} />
     </Box>
   );
 };
@@ -49,7 +50,7 @@ Task.propTypes={
     onStatusChange:PropTypes.func,
     onClick:PropTypes.func,
     priority:PropTypes.string,
-    status:PropTypes.oneOf(["InProgress", "Todo", "Completed"]) as Validator<correctStatustype>
+    status:PropTypes.oneOf(["InProgress", "Todo", "Completed"]) as Validator<Status>
 }
 
 export default Task;

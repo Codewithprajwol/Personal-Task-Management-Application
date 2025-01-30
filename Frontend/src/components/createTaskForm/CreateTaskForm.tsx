@@ -25,8 +25,8 @@ const CreateTaskForm: FC = (): ReactElement => {
     }
     const newTask:ICreateTask={title,description,date:date.toString(),priority,status}
     createTaskMutation.mutate(newTask)
-    // setTitle('')
-    // setDescription('')
+      // setTitle('')
+      // setDescription('')
   }
   useEffect(()=>{
     if(createTaskMutation.isSuccess){
@@ -60,8 +60,8 @@ const CreateTaskForm: FC = (): ReactElement => {
             items={[
               { value: Status.todo, label: Status.todo.toUpperCase() },
               {
-                value: Status.completed,
-                label: Status.completed.toUpperCase(),
+                value: Status.complete,
+                label: Status.complete.toUpperCase(),
               },
             ]}
           />

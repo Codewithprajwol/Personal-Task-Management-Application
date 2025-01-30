@@ -1,10 +1,10 @@
 import { Status } from "../../createTaskForm/enums/Status"
 
-export type correctStatustype=Status.completed | Status.inProgress |Status.todo
 
-export const emitCorrectStatus=(status:correctStatustype):string=>{
+
+export const emitCorrectStatus=(status:Status):string=>{
    switch(status){
-    case Status.completed:
+    case Status.complete:
         return 'success.light'
     case Status.inProgress:
         return 'warning.light'
