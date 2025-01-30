@@ -18,7 +18,7 @@ const CreateTaskForm: FC = (): ReactElement => {
   const [status,setStatus]=useState<string>(Status.todo)
   const [showAlert,setShowAlert]=useState<boolean>(false)
 
-  const createTaskMutation=useMutation({mutationFn:(data:ICreateTask)=>{return sendApiRequest('http://localhost:3000/tasks','POST',data)}})
+  const createTaskMutation=useMutation({mutationFn:async(data:ICreateTask)=>{return await sendApiRequest('http://localhost:3000/tasks','POST',data)}})
   function createTaskhandler(){
     if(!title || !description ||! date){
       return

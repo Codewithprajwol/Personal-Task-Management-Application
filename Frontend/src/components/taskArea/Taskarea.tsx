@@ -1,13 +1,14 @@
-import { FC, ReactElement } from "react";
+import React,{ FC, ReactElement } from "react";
 import Grid from "@mui/material/Grid2";
 import { Alert, Box, LinearProgress } from "@mui/material";
 import { format } from "date-fns";
 import { TaskCounter } from "../taskCounter/TaskCounter";
 import { Status } from "../createTaskForm/enums/Status";
 import Task from "../task/Task";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/sendApiRequest";
 import { ITaskApi } from "./interfaces/ITaskApi";
+import { IUpdateTask } from "./interfaces/IUpdateTask";
 
 const Taskarea: FC = (): ReactElement => {
   const { error, isLoading, data, refetch } = useQuery({
@@ -15,6 +16,23 @@ const Taskarea: FC = (): ReactElement => {
     queryFn: async () =>
       await sendApiRequest<ITaskApi[]>("http://localhost:3000/tasks", "GET"),
   });
+  const updateTaskMutation=useMutation({
+    mutationFn:async(data:IUpdateTask)=>await sendApiRequest('http://localhost:3000/tasks','PUT',data) })
+
+function handleOnStatusChange(e:React.ChangeEvent<HTMLInputElement>,id:string){
+  updateTaskMutation.mutate({
+    id:id,
+    status: Status[e.target.checked ? "inProgress" : "todo"]
+  });
+
+  
+}
+function handleOnMarkComplete(e:React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>,id:string){
+  updateTaskMutation.mutate({
+    id:id,
+    status:Status.complete
+  })
+}
   return (
     <>
       <Grid size={{ xs: 6, md: 8 }}>
@@ -64,6 +82,8 @@ const Taskarea: FC = (): ReactElement => {
                     status={eachTask.status}
                     priority={eachTask.priority}
                     date={new Date(eachTask.date)}
+                    onStatusChange={handleOnStatusChange}
+                    onClick={handleOnMarkComplete}
                   />
                 ):(false);
               })
